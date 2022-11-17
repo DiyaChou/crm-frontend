@@ -1,0 +1,49 @@
+.entry {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: lightblue;
+
+}
+
+.entry__container {
+    padding: 3em 2em;
+    background: white;
+}
+
+.entry__title {
+    text-align: center;
+}
+
+.entry__form__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.entry__form__container {
+    margin-top: 1em;
+}
+
+.entry__container>hr {
+    color: ghostwhite;
+}
+
+.form__label {
+    margin-bottom: 0.4em;
+}
+
+.form__input {
+    font-size: 1.2em;
+    padding: 0.2em 0.5em;
+    border-radius: 0.2em;
+}
+
+.form__submit {
+    font-size: 1em;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    background-color: dodgerblue;
+    color: white;
+    margin-top: 1em;
+}
