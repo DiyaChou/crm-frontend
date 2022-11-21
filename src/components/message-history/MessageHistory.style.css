@@ -1,0 +1,23 @@
+.history__block {
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
+.history__block:nth-child(even) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.history__send {
+    font-weight: 600;
+}
+
+.history__message {
+    padding: 1rem;
+    width: 80%;
+    border: 1px solid #cecece;
+}

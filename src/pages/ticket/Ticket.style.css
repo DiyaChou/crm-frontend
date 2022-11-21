@@ -1,0 +1,9 @@
+.ticket__info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.ticket__info .btn {
+    justify-self: end;
+}

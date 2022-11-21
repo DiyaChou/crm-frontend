@@ -3,7 +3,24 @@
         "id": 1,
         "subject": "Email with ssl certificate",
         "status": "client response pending",
-        "addedAt": "2020-09-23"
+        "addedAt": "2020-09-23",
+        "history": [
+            {
+                "date": "20-10-10",
+                "message": "fdsafdsaf",
+                "messageBy": "operator"
+            },
+            {
+                "date": "20-10-10",
+                "message": "fdsafdsaf",
+                "messageBy": "client"
+            },
+            {
+                "date": "20-10-10",
+                "message": "fdsafdsaf",
+                "messageBy": "operator"
+            }
+        ]
     },
     {
         "id": 2,

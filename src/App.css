@@ -63,6 +63,7 @@ p {
     color: white;
     background-color: dodgerblue;
     border-radius: 0.5em;
+    height: fit-content;
 }
 
 .btn:hover {
