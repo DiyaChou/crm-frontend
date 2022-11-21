@@ -1,0 +1,30 @@
+#add_ticket_form {
+    min-width: 50%;
+}
+
+.add_ticket_form__btn {
+    margin-top: 1em;
+}
+
+.add_ticket__form__label {
+    width: 12em;
+    margin-bottom: 0.4em;
+}
+
+.add_ticket__form__input {
+    width: 100%;
+    font-size: 1em;
+    padding: 0.5em;
+    border-radius: 0.2em;
+    border: 1px solid gray;
+}
+
+.add_ticket__form__container {
+    display: flex;
+    margin-top: 1em;
+    align-items: center;
+}
+
+.form__title {
+    font-size: 2em;
+}

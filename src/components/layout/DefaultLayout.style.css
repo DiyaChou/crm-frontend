@@ -1,0 +1,60 @@
+.defaultlayout {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 5em auto 50px;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+}
+
+header {
+    grid-area: header;
+    background: lightblue;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+    background: lightblue;
+}
+
+nav {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2em;
+}
+
+.header__logo_container {
+
+    overflow: hidden;
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+}
+
+.header__logo {
+    width: 100%;
+}
+
+.header__nav__unordered_list {
+    list-style-type: none;
+    display: flex;
+}
+
+.header__nav__list_item {
+    margin-right: 2em;
+    text-decoration: none;
+}
+
+.footer {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

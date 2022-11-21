@@ -1,0 +1,16 @@
+#dashboard {
+    padding: 2em;
+}
+
+
+.dashboard__top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2em 0;
+}
+
+.dashboard_btn {
+    font-size: 2em;
+}

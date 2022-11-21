@@ -1,0 +1,10 @@
+.ticket_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ticket_table__column {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 0.5em;
+}

@@ -28,11 +28,11 @@ const Entry = () => {
   return (
     <div className="entry">
       {frmLoad === "login" && (
-        <div className="entry__container">
-          <h1 className="entry__title">Client Login</h1>
+        <div className="form_wrapper">
+          <h1 className="form__title">Client Login</h1>
           <hr />
           <form className="entry__form">
-            <div className="entry__form__container">
+            <div className="form__container">
               <label className="form__label" htmlFor="client_email">
                 Email
               </label>
@@ -46,7 +46,7 @@ const Entry = () => {
                 onChange={handleOnChange}
               />
             </div>
-            <div className="entry__form__container">
+            <div className="form__container">
               <label className="form__label" htmlFor="client_password">
                 Password
               </label>
@@ -74,11 +74,11 @@ const Entry = () => {
       )}
 
       {frmLoad === "reset" && (
-        <div className="entry__container">
-          <h1 className="entry__title">Reset Password</h1>
+        <div className="form_wrapper">
+          <h1 className="form__title">Reset Password</h1>
           <hr />
-          <form className="entry__form">
-            <div className="entry__form__container">
+          <form className="form">
+            <div className="form__container">
               <label className="form__label" htmlFor="client_email">
                 Email
               </label>
