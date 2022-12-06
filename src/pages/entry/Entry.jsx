@@ -1,13 +1,34 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginFail, loginPending, loginSuccess } from "./entry.slice";
 import "./Entry.style.css";
+import Spinner from "../../assets/gifs/Spinner.gif";
+import AlertBox from "../../components/AlertBox/AlertBox.main";
+import { userLogin } from "../../api/userApi";
+import { useNavigate } from "react-router-dom";
 
 const Entry = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [frmLoad, setFrmLoad] = useState("login");
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const dispatch = useDispatch();
+  const { isLoading, isAuth, error } = useSelector((state) => state.login);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!email || !password) alert("fill the form completely");
+    dispatch(loginPending());
+    try {
+      const isAuth = await userLogin({ email, password });
+      if (isAuth.status === "error") return dispatch(loginFail(isAuth.message));
+      console.log(isAuth);
+      dispatch(loginSuccess());
+      navigate("/dashboard");
+    } catch (err) {
+      dispatch(loginFail(err.message));
+    }
   };
 
   const handleOnChange = (e) => {
@@ -31,6 +52,7 @@ const Entry = () => {
         <div className="form_wrapper">
           <h1 className="form__title">Client Login</h1>
           <hr />
+          {error && <AlertBox text={error} />}
           <form className="entry__form">
             <div className="form__container">
               <label className="form__label" htmlFor="client_email">
@@ -63,6 +85,7 @@ const Entry = () => {
             <button className="form__submit" onClick={handleSubmit}>
               Login
             </button>
+            {isLoading && <img src={Spinner} alt="loading" />}
           </form>
           <hr />
           <div>

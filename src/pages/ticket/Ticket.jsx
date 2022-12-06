@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import tickets from "../../dummydata/ticket.dummydata.json";
 import MessageHistory from "../../components/message-history/MessageHistory.comp";
 import UpdateTicket from "../../components/update-ticket/UpdateTicket";
 import "./Ticket.style.css";
+import { useParams } from "react-router-dom";
 
-const ticket = tickets[0];
 const Ticket = () => {
+  const { tid } = useParams();
+
   const [message, setMessage] = useState("");
+  const [ticket, setTicket] = useState("");
 
   const handleOnChange = (e) => {
     setMessage(e.target.value);
@@ -14,6 +17,14 @@ const Ticket = () => {
   const handleOnSubmit = (e) => {
     alert("form submitted");
   };
+
+  useEffect(() => {
+    setTicket(tickets.filter((item) => item.id === tid)[0]);
+  }, [message, tid]);
+
+  useEffect(() => {
+    console.log(ticket);
+  }, [ticket]);
 
   return (
     <div>

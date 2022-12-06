@@ -1,6 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { filterSearchTicket } from "../../pages/ticket-listing/ticketActions";
 
-const SearchForm = ({ handleOnChange, str }) => {
+const SearchForm = () => {
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    dispatch(filterSearchTicket(value));
+  };
+
   return (
     <div className="form__container">
       <form>
@@ -13,8 +22,7 @@ const SearchForm = ({ handleOnChange, str }) => {
           id="searchStr"
           placeholder="Search ..."
           className="form__input"
-          onChange={handleOnChange}
-          value={str}
+          onChange={handleChange}
         />
       </form>
     </div>
