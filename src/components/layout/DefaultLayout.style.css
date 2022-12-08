@@ -15,6 +15,7 @@ header {
 
 main {
     grid-area: main;
+    padding: 2% 5%;
 }
 
 footer {

@@ -1,8 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { userLogout } from "../../../api/userApi";
 import logo from "../../../assets/brand/logo.jpg";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const logMeOut = async () => {
+    await userLogout();
+    sessionStorage.removeItem("accessJWT");
+    localStorage.removeItem("crmSite");
+    // navigate("/");
+  };
   return (
     <nav>
       <div className="header__logo_container">
@@ -15,9 +23,9 @@ const Header = () => {
         <Link to="/Tickets" className="header__nav__list_item">
           Tickets
         </Link>
-        <Link to="/Logout" className="header__nav__list_item">
+        <a href="/" className="header__nav__list_item" onClick={logMeOut}>
           Logout
-        </Link>
+        </a>
       </ul>
     </nav>
   );

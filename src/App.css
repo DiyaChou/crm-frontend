@@ -9,6 +9,10 @@ p {
     padding: 0;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 /* start: form */
 
 .form_wrapper {
@@ -73,6 +77,11 @@ p {
 
 .btn:active {
     background-color: rgb(21, 103, 185);
+}
+
+.btn:disabled {
+    background-color: #7d9ebf;
+    cursor: not-allowed;
 }
 
 .w-full {

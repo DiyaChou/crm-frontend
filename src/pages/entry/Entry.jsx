@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginFail, loginPending, loginSuccess } from "./entry.slice";
 import "./Entry.style.css";
 import Spinner from "../../assets/gifs/Spinner.gif";
-import AlertBox from "../../components/AlertBox/AlertBox.main";
+import AlertBox from "../../components/AlertBox/AlertBox.comp";
 import { userLogin } from "../../api/userApi";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getUserProfile } from "../dashboard/userAction";
 
 const Entry = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [frmLoad, setFrmLoad] = useState("login");
   const navigate = useNavigate();
-
+  let location = useLocation();
   const dispatch = useDispatch();
   const { isLoading, isAuth, error } = useSelector((state) => state.login);
+  let { from } = location.state || { from: { pathname: "/" } };
+
+  useEffect(() => {
+    sessionStorage.getItem("accessJWT") &&
+      navigate("/dashboard", { replace: true });
+  }, [navigate, isAuth]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,9 +29,10 @@ const Entry = () => {
     dispatch(loginPending());
     try {
       const isAuth = await userLogin({ email, password });
+      console.log("isAuth", isAuth);
       if (isAuth.status === "error") return dispatch(loginFail(isAuth.message));
-      console.log(isAuth);
       dispatch(loginSuccess());
+      dispatch(getUserProfile());
       navigate("/dashboard");
     } catch (err) {
       dispatch(loginFail(err.message));

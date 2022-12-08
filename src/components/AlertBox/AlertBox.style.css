@@ -1,5 +1,12 @@
 .alertBox {
     width: 100%;
-    background-color: #ffdbdb;
     padding: 0.5em;
+}
+
+.lightred {
+    background-color: #ffdbdb;
+}
+
+.lightgreen {
+    background-color: rgb(213, 255, 213);
 }

@@ -1,49 +1,49 @@
-import React, { useEffect, useState } from "react";
-import tickets from "../../dummydata/ticket.dummydata.json";
+import React, { useEffect } from "react";
 import MessageHistory from "../../components/message-history/MessageHistory.comp";
 import UpdateTicket from "../../components/update-ticket/UpdateTicket";
 import "./Ticket.style.css";
 import { useParams } from "react-router-dom";
+import {
+  closeTicket,
+  fetchSingleTicket,
+} from "../ticket-listing/ticketActions";
+import { useDispatch, useSelector } from "react-redux";
+import loadingGif from "../../assets/gifs/Spinner.gif";
+import AlertBox from "../../components/AlertBox/AlertBox.comp";
 
 const Ticket = () => {
-  const { tid } = useParams();
-
-  const [message, setMessage] = useState("");
-  const [ticket, setTicket] = useState("");
-
-  const handleOnChange = (e) => {
-    setMessage(e.target.value);
-  };
-  const handleOnSubmit = (e) => {
-    alert("form submitted");
-  };
-
+  const { tId } = useParams();
+  const dispatch = useDispatch();
+  const { selectedTicket, isLoading, error, replymsg } = useSelector(
+    (state) => state.tickets
+  );
   useEffect(() => {
-    setTicket(tickets.filter((item) => item.id === tid)[0]);
-  }, [message, tid]);
-
-  useEffect(() => {
-    console.log(ticket);
-  }, [ticket]);
+    dispatch(fetchSingleTicket(tId));
+  }, [tId, dispatch]);
 
   return (
     <div>
       <div className="ticket__info">
+        {isLoading && <img src={loadingGif} alt="loading" />}
+        {error && <AlertBox varient="error" text={error} />}
+        {replymsg}
         <div className="ticket__info__container">
-          <div className="subject">{ticket.subject}</div>
-          <div className="addedAt">{ticket.addedAt}</div>
-          <div className="status">{ticket.status}</div>
+          <div className="subject">Subject: {selectedTicket.subject}</div>
+          <div className="addedAt">Ticket Opened: {selectedTicket.openAt}</div>
+          <div className="status">Status: {selectedTicket.status}</div>
         </div>
-        <button className="btn">Close Ticket</button>
+        <button
+          className="btn"
+          disabled={selectedTicket.status === "Closed"}
+          onClick={() => dispatch(closeTicket(tId))}
+        >
+          Close Ticket
+        </button>
       </div>
       <div>
-        <MessageHistory msg={ticket.history} />
+        <MessageHistory msg={selectedTicket.conversation} />
       </div>
-      <UpdateTicket
-        msg={message}
-        handleOnChange={handleOnChange}
-        handleOnSubmit={handleOnSubmit}
-      />
+      <UpdateTicket tId={tId} />
     </div>
   );
 };

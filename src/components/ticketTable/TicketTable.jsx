@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./TicketTable.style.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -7,6 +7,10 @@ const TicketTable = () => {
   const { searchTicketList, isLoading, error } = useSelector(
     (state) => state.tickets
   );
+
+  useEffect(() => {
+    console.log("se", searchTicketList);
+  }, [searchTicketList]);
 
   return (
     <table className="ticket_table">
@@ -35,12 +39,14 @@ const TicketTable = () => {
                 <Link to={`/ticket/${row._id}`}>{row.subject}</Link>
               </td>
               <td className="ticket_table__column">{row.status}</td>
-              <td className="ticket_table__column">{row.addedAt}</td>
+              <td className="ticket_table__column">
+                {row.openAt && new Date(row.openAt).toLocaleString()}
+              </td>
             </tr>
           ))
         ) : (
           <tr>
-            <td>"no ticket to show"</td>
+            <td>no ticket to show</td>
           </tr>
         )}
       </tbody>
