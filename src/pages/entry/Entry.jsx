@@ -16,12 +16,17 @@ const Entry = () => {
   let location = useLocation();
   const dispatch = useDispatch();
   const { isLoading, isAuth, error } = useSelector((state) => state.login);
-  let { from } = location.state || { from: { pathname: "/" } };
+  let { from } = location.state || { from: { pathname: "/dashboard" } };
 
   useEffect(() => {
-    sessionStorage.getItem("accessJWT") &&
-      navigate("/dashboard", { replace: true });
+    sessionStorage.getItem("accessJWT") && navigate(from, { replace: true });
+    // sessionStorage.getItem("accessJWT") &&
+    //   navigate("/dashboard", { replace: true });
   }, [navigate, isAuth]);
+
+  useEffect(() => {
+    console.log(from);
+  }, [from]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

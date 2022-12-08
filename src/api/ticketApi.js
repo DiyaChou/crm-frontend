@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getAllTicketsUrl = `${process.env.REACT_APP_BACKEND_URL}/v1/ticket`;
+const ticketsUrl = `${process.env.REACT_APP_BACKEND_URL}/v1/ticket`;
 const getSingleTicketUrl = `${process.env.REACT_APP_BACKEND_URL}/v1/ticket/`;
 const closeTicketUrl = `${process.env.REACT_APP_BACKEND_URL}/v1/ticket/close_ticket/`;
 
@@ -8,7 +8,7 @@ export const getAllTickets = () => {
   return new Promise(async (resolve, reject) => {
     try {
       await axios
-        .get(getAllTicketsUrl, {
+        .get(ticketsUrl, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("accessJWT")}`,
           },
@@ -66,6 +66,22 @@ export const updateTicketStatusClosed = (_id) => {
         }
       );
       resolve(result.data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const createNewTicket = (formData) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      axios
+        .post(ticketsUrl, formData, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("accessJWT")}`,
+          },
+        })
+        .then((result) => resolve(result.data));
     } catch (error) {
       reject(error);
     }

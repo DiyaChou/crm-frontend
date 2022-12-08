@@ -1,27 +1,49 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { shortText } from "../../utils/validation";
+import { openNewTicket } from "./addTicketAction";
 import "./AddTicketForm.style.css";
 
 const AddTicketForm = () => {
-  const [formState, setFormState] = useState({
+  const dispatch = new useDispatch();
+  const initialFormData = {
     subject: "",
-    status: "",
-    addedAt: "",
-  });
-  const [formErrorsState, setFormErrorsState] = useState({
+    message: "",
+    openAt: "",
+  };
+
+  const initialFormErrorData = {
     subject: "",
-    status: "",
-    addedAt: "",
-  });
+    message: "",
+    openAt: "",
+  };
+
+  const {
+    user: { name },
+  } = useSelector((state) => state.user);
+
+  const [formData, setFormData] = useState(initialFormData);
+  const [formDataErrors, setFormDataError] = useState(initialFormErrorData);
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-
-    setFormState({
-      ...formState,
+    console.log(name, value);
+    setFormData({
+      ...formData,
       [name]: value,
     });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const isSubjectValid = shortText(formData.subject);
+
+    setFormDataError({
+      ...initialFormData,
+      subject: !isSubjectValid,
+    });
+    dispatch(openNewTicket({ ...formData, sender: name }));
+  };
 
   return (
     <section id="add_ticket_form">
@@ -38,34 +60,34 @@ const AddTicketForm = () => {
               type="text"
               placeholder="Enter subject"
               id="subject"
-              value={formState.subject}
+              value={formData.subject}
               name="subject"
               onChange={handleOnChange}
             />
           </div>
           <div className="add_ticket__form__container">
-            <label className="add_ticket__form__label" htmlFor="addedAt">
+            <label className="add_ticket__form__label" htmlFor="openAt">
               Issue Found
             </label>
             <input
               className="add_ticket__form__input"
               type="date"
-              id="addedAt"
-              value={formState.addedAt}
-              name="addedAt"
+              id="openAt"
+              value={formData.openAt}
+              name="openAt"
               onChange={handleOnChange}
             />
           </div>
           <div className="form__container">
-            <label className="form__label" htmlFor="status">
-              Status
+            <label className="form__label" htmlFor="message">
+              message
             </label>
             <textarea
               className="form__input"
               placeholder="..."
-              id="status"
-              value={formState.status}
-              name="status"
+              id="message"
+              value={formData.message}
+              name="message"
               rows="5"
               onChange={handleOnChange}
             />

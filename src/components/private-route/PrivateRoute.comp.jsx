@@ -16,21 +16,22 @@ const PrivateRoute = ({ children }) => {
       try {
         const result = await fetchNewAccessJWT();
         result && dispatch(loginSuccess());
-
-        !user._id && dispatch(getUserProfile());
-
-        !sessionStorage.getItem("accessJWT") &&
-          localStorage.getItem("crmSite") &&
-          updateAccessJWT();
       } catch (error) {
         console.log("error", error);
       }
     };
 
-    updateAccessJWT();
+    if (!user._id) {
+      console.log(1);
+      dispatch(getUserProfile());
+    }
+
+    !sessionStorage.getItem("accessJWT") &&
+      localStorage.getItem("crmSite") &&
+      updateAccessJWT();
 
     sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
-  }, [dispatch, isAuth, user]);
+  }, [dispatch, isAuth, user._id]);
 
   return isAuth ? (
     <DefaultLayout>{children}</DefaultLayout>

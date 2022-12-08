@@ -3,14 +3,10 @@ import "./TicketTable.style.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const TicketTable = () => {
-  const { searchTicketList, isLoading, error } = useSelector(
-    (state) => state.tickets
-  );
-
-  useEffect(() => {
-    console.log("se", searchTicketList);
-  }, [searchTicketList]);
+const TicketTable = ({ tickets }) => {
+  const { isLoading, error } = useSelector((state) => state.tickets);
+  console.log("tickets", tickets);
+  // useEffect(() => {}, [tickets]);
 
   return (
     <table className="ticket_table">
@@ -31,8 +27,8 @@ const TicketTable = () => {
         </tr>
       </thead>
       <tbody>
-        {searchTicketList && searchTicketList.length ? (
-          searchTicketList.map((row) => (
+        {tickets && tickets.length ? (
+          tickets.map((row) => (
             <tr key={row._id} className="ticket_table__row">
               <td className="ticket_table__column">{row._id}</td>
               <td className="ticket_table__column">

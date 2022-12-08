@@ -2,21 +2,25 @@ import React, { useEffect, useState } from "react";
 import SearchForm from "../../components/search-form/SearchForm.comp";
 import TicketTable from "../../components/ticketTable/TicketTable";
 import "./TicketListing.style.css";
-import tickets from "../../dummydata/ticket.dummydata.json";
 import { Link } from "react-router-dom";
 import { fetchAllTickets } from "./ticketActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const TicketListing = () => {
   const dispatch = useDispatch();
-
+  const { searchTicketList, isLoading, error } = useSelector(
+    (state) => state.tickets
+  );
   const [str, setStr] = useState("");
-  const [displayTicket, setDisplayTicket] = useState(tickets);
 
   useEffect(() => {
     console.log(1);
     dispatch(fetchAllTickets());
-  }, [str, displayTicket]);
+  }, [str, dispatch]);
+
+  useEffect(() => {
+    console.log(searchTicketList);
+  }, [searchTicketList]);
 
   return (
     <div className="ticket_listing">
@@ -27,7 +31,7 @@ const TicketListing = () => {
         </Link>
         <SearchForm />
       </div>
-      <TicketTable tickets={displayTicket} />
+      <TicketTable tickets={searchTicketList} />
     </div>
   );
 };
