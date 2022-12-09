@@ -106,6 +106,12 @@ const Entry = () => {
               Forgot password?
             </a>
           </div>
+          <div>
+            <span>New? </span>
+            <a href="#" onClick={() => navigate("/register")}>
+              sign up
+            </a>
+          </div>
         </div>
       )}
 

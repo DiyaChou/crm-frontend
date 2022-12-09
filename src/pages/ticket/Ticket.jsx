@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import loadingGif from "../../assets/gifs/Spinner.gif";
 import AlertBox from "../../components/AlertBox/AlertBox.comp";
+import { resetReplyTicketState } from "../ticket-listing/ticketSlice";
 
 const Ticket = () => {
   const { tId } = useParams();
@@ -20,11 +21,17 @@ const Ticket = () => {
     dispatch(fetchSingleTicket(tId));
   }, [tId, dispatch]);
 
+  useEffect(() => {
+    return () => {
+      (replymsg || replyTicketError) && dispatch(resetReplyTicketState());
+    };
+  }, [dispatch, replymsg, replyTicketError]);
+
   return (
     <div>
       {isLoading && <img src={loadingGif} alt="loading" />}
-      {error && <AlertBox varient="error" text={error} />}
-      {replyTicketError && <AlertBox varient="error" text={replyTicketError} />}
+      {error && <AlertBox variant="error" text={error} />}
+      {replyTicketError && <AlertBox variant="error" text={replyTicketError} />}
 
       {replymsg}
       <div className="ticket__info">

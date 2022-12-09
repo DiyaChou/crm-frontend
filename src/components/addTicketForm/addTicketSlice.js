@@ -21,10 +21,19 @@ const newTicketSlice = createSlice({
       state.isLoading = false;
       state.error = payload;
     },
+    resetNewTicketState: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = "";
+      state.successMsg = "";
+    },
   },
 });
 
-export const { openNewTicketFail, openNewTicketPending, openNewTicketSuccess } =
-  newTicketSlice.actions;
+export const {
+  openNewTicketFail,
+  openNewTicketPending,
+  openNewTicketSuccess,
+  resetNewTicketState,
+} = newTicketSlice.actions;
 
 export default newTicketSlice.reducer;

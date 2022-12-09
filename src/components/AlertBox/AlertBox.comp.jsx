@@ -5,8 +5,8 @@ const AlertBox = (props) => {
   return (
     <div
       className={
-        props.varient
-          ? props.varient === "error"
+        props.variant
+          ? props.variant === "error"
             ? "alertBox lightred"
             : "alertBox lightgreen"
           : "alertBox lightred"

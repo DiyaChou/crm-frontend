@@ -1,11 +1,20 @@
-.entry {
+.registeration {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background: lightblue;
+    padding: 2em 0px;
 }
 
-.entry__form img {
+.registeration__form img {
     width: 2em;
+}
+
+.text-danger {
+    color: red;
+}
+
+.text-approved {
+    color: green;
 }

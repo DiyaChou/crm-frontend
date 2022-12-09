@@ -14,8 +14,8 @@ const Dashboard = () => {
   const totalTickets = tickets.length;
 
   useEffect(() => {
-    if (!tickets.length) dispatch(fetchAllTickets());
-  }, [dispatch, tickets]);
+    dispatch(fetchAllTickets());
+  }, []);
 
   return (
     <section id="dashboard">

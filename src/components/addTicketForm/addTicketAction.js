@@ -11,7 +11,7 @@ export const openNewTicket = (formData) => async (dispatch) => {
     const result = await createNewTicket(formData);
     console.log("result opennewticket: ", result);
     if (result.status === "success")
-      dispatch(openNewTicketSuccess(result.message));
+      return dispatch(openNewTicketSuccess(result.message));
     dispatch(openNewTicketFail(result.message));
   } catch (error) {
     console.log(error);

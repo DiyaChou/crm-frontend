@@ -25,7 +25,7 @@ const UpdateTicket = ({ tId }) => {
 
   return (
     <div>
-      {replyMsg && <AlertBox varient="success" text={replyMsg} />}
+      {replyMsg && <AlertBox variant="success" text={replyMsg} />}
       <form className="form__container" onSubmit={handleOnSubmit}>
         <label htmlFor="updateticket__input" className="form__label">
           Reply

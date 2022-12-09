@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { shortText } from "../../utils/validation";
+import AlertBox from "../AlertBox/AlertBox.comp";
 import { openNewTicket } from "./addTicketAction";
 import "./AddTicketForm.style.css";
+import { resetNewTicketState } from "./addTicketSlice";
 
 const AddTicketForm = () => {
+  const {
+    user: { name },
+  } = useSelector((state) => state.user);
+
+  const { isLoading, error, successMsg } = useSelector(
+    (state) => state.newTicket
+  );
+
   const dispatch = new useDispatch();
   const initialFormData = {
     subject: "",
@@ -18,16 +28,17 @@ const AddTicketForm = () => {
     openAt: "",
   };
 
-  const {
-    user: { name },
-  } = useSelector((state) => state.user);
-
   const [formData, setFormData] = useState(initialFormData);
   const [formDataErrors, setFormDataError] = useState(initialFormErrorData);
 
+  useEffect(() => {
+    return () => {
+      if (error || successMsg) dispatch(resetNewTicketState());
+    };
+  }, [dispatch, error, successMsg]);
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setFormData({
       ...formData,
       [name]: value,
@@ -51,6 +62,9 @@ const AddTicketForm = () => {
         <h1 className="form__title">Add Ticket</h1>
         <hr />
         <form className="form">
+          {error && <AlertBox text={error} />}
+          {successMsg && <AlertBox variant="success" text={successMsg} />}
+
           <div className="add_ticket__form__container">
             <label className="add_ticket__form__label" htmlFor="subject">
               Subject

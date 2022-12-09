@@ -6,13 +6,19 @@ import TicketListing from "./pages/ticket-listing/TicketListing";
 import Ticket from "./pages/ticket/Ticket";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/private-route/PrivateRoute.comp";
+import Registration from "./pages/registration/Registration.page";
+import UserVerification from "./pages/userVerification/UserVerification.page";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Entry />} />
-
+        <Route path="/register" element={<Registration />} />
+        <Route
+          path="/verification/:_id/:email"
+          element={<UserVerification />}
+        />
         <Route
           index
           path="/dashboard"
